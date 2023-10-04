@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eq. do 2º Grau</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .coeficientes {
+            width: 80px;
+            height: 20px;
+            background-color: rgba(235, 160, 89, 0.651);
+        }
+        input#CALCULAR {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(235, 160, 89, 0.651);
+        }
+        .explicação {
+            text-indent: 30px;
+            text-align: justify;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <script type="text/javascript" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script> 
+</head>
+<body>
+    <main>
+        <h1>Calculadora de Bhaskara</h1> <hr>
+        <h2>Conceitos Preliminares</h2>
+        <p class="explicação">
+            A <strong>Fórmula de Bhaskara</strong> calcula as raizes de equações do segundo grau, isto é, equações em que a maior potência é 2. Abaixo, está uma calculadora para encontrar as raízes dessas equações. Caro usuário, para utilizar lembre-se que essas equações são do tipo: 
+            <br>
+        <p class="explicação" style="text-align: center;">
+            \[ax^{2}+bx+c=0,\]
+        </p>
+        <p>
+            onde os coeficientes <em>a</em>, <em>b</em> e <em>c</em> são números reais, mas a &ne; 0.
+        </p>
+        </p>
+        <h2>Calculadora</h2>
+        <p>
+            Digite o valor de a:  
+            <input type="number" id="a" class="coeficientes">
+            <br>
+            Digite o valor de b: 
+            <input type="number" id="b" class="coeficientes"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <input type="button" value="CALCULAR" id="CALCULAR" onclick="calcular()" onmousemove="mover_mouse()" onmouseout="mouse_sair()">
+            <br>
+            Digite o valor de c:
+            <input type="number" id="c" class="coeficientes">
+            <div id="resolver_eq">Aguardando parâmetros...</div>
+            <script>
+                function calcular() {
+                    var a_string = window.document.getElementById('a')
+                    var b_string = window.document.getElementById('b')
+                    var c_string = window.document.getElementById('c')
+                    var a = Number(a_string.value)
+                    var b = Number(b_string.value)
+                    var c = Number(c_string.value)
+                    var delta = ((b**2) - (4*a*c))
+                    if (delta < 0) {
+                        resolver_eq.innerHTML = 'Raízes complexas, ou seja, S={}, pois não existe solução real.'
+                        var cor = window.document.getElementById('CALCULAR')
+                        cor.style.background = 'red'
+                    } else if (delta == 0) {
+                        var x = -b/(2*a)
+                        resolver_eq.innerHTML = `Delta é zero, logo as raizes são idênticas e têm o valor ${x}.`
+                        var cor = window.document.getElementById('CALCULAR')
+                    cor.style.background = 'blueviolet'
+                    } else {
+                        var x1 = (-b + ((delta)**(1/2)))/(2*a)
+                        var x2 = (-b - ((delta)**(1/2)))/(2*a)
+                        resolver_eq.innerHTML = `As raízes são:  x1 = ${x1} e x2 = ${x2}.`
+                        var cor = window.document.getElementById('CALCULAR')
+                        cor.style.background = 'greenyellow'
+                    }
+                }
+                    
+                function mover_mouse() {
+                    var cor_dinamica = window.document.getElementById('CALCULAR')
+                    cor_dinamica.style.background = 'blue'
+                }
+                function mouse_sair() {
+                    var mouse_saindo = window.document.getElementById('CALCULAR')
+                    mouse_saindo.style.background = 'rgb(235, 160, 89, 0.651)'
+                }
+            </script>
+        </p>
+        <h2>Observações</h2>
+        <p class="explicação">
+            Note que o botão <strong>CALCULAR</strong> muda de cor, no caso do click, para diferenciar as três possíveis situações para as soluções de equações do segundo grau. São elas:
+        </p>
+        <ul type="disk">
+            <li style="color: greenyellow; text-shadow: 1px 1px black;">Verde: Delta maior que zero implicando em duas raízes;</li>
+            <li style="color: blueviolet; text-shadow: 1px 1px black;">Violeta: Delta igual a zero;</li>
+            <li style="color: red; text-shadow: 1px 1px black;">Vermelho: Delta menor que zero;</li>
+        </ul>
+        <h3>Equações</h3>
+        <p class="explicação">
+            As equações utilizadas nesse projeto são:
+            <ul type="disk">
+                <li> \( \Delta=b^{2}-4ac \) &nbsp;&nbsp;&nbsp; (Para calcular o delta)</li>
+                <li> \(x_{1,2}=\frac{-b \pm \sqrt{\Delta}} {2a}\) &nbsp;&nbsp;&nbsp;  (Para calcular as raízes)</li> 
+            </ul>
+        </p>
+    </main>
+</body>
+</html>
